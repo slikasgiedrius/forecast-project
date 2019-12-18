@@ -1,4 +1,7 @@
 package com.giedrius.forecastproject.utils.mvp
 
-interface BasePresenter {
+interface BasePresenter<T> {
+
+    fun takeView(view: T)
+    fun dropView()
 }
