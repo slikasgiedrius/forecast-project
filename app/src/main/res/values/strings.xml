@@ -1,7 +1,7 @@
 <resources>
     <string name="appName">Forecast project</string>
-    
     <string name="fragment_now">NOW</string>
     <string name="fragment_hourly">HOURLY</string>
     <string name="fragment_forecast">FORECAST</string>
+    <string name="search_bar_hint">City name goes here</string>
 </resources>
