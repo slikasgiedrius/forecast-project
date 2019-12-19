@@ -6,12 +6,21 @@ import android.text.TextWatcher
 import android.util.Log
 import androidx.core.content.ContextCompat
 import com.giedrius.forecastproject.dagger.BaseDaggerActivity
+import com.giedrius.forecastproject.daily.DailyContract.View
 import com.giedrius.forecastproject.utils.database.LocationStorage
 import com.giedrius.forecastproject.now.NowFragment
 import com.giedrius.forecastproject.hourly.HourlyFragment
 import com.giedrius.forecastproject.daily.DailyFragment
+import com.giedrius.forecastproject.daily.network.Daily
+import com.giedrius.forecastproject.daily.network.DailyService
 import com.giedrius.forecastproject.utils.extensions.onRightDrawableClicked
+import com.giedrius.forecastproject.utils.mvp.ViewPresenter
 import com.giedrius.forecastproject.utils.pager.ViewPagerAdapter
+import com.giedrius.forecastproject.utils.schedulers.Main
+import com.giedrius.forecastproject.utils.values.Constants
+import io.reactivex.Scheduler
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.rxkotlin.addTo
 import kotlinx.android.synthetic.main.activity_main.search_edit_text
 import kotlinx.android.synthetic.main.activity_main.tabs
 import kotlinx.android.synthetic.main.activity_main.viewPager
@@ -22,12 +31,35 @@ class MainActivity : BaseDaggerActivity() {
     @Inject
     lateinit var mLocationStorage: LocationStorage
 
+    @Inject
+    lateinit var dailyService: DailyService
+
+    @Inject @field:Main lateinit var mainScheduler: Scheduler
+
+    private val subscription = CompositeDisposable()
+
     override fun getLayoutId() = R.layout.activity_main
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initViewPager()
         initSearchBar()
+
+        dailyService.getDailyForecast(Constants.VILNIUS_LOCATION_KEY, BuildConfig.API_KEY)
+            .observeOn(mainScheduler)
+            .subscribe(::onDailyForecastsReceived, ::onDailyForecastsFailed)
+            .addTo(subscription)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        subscription.dispose()
+    }
+
+    private fun onDailyForecastsReceived(dailyForecast: Daily) {
+    }
+
+    private fun onDailyForecastsFailed(throwable: Throwable) {
 
     }
 
