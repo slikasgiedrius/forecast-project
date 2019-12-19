@@ -11,8 +11,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.giedrius.forecastproject.R
 import com.giedrius.forecastproject.dagger.BaseDaggerFragment
 import com.giedrius.forecastproject.hourly.list.HourlyAdapter
-import com.giedrius.forecastproject.utils.values.Constants
-import kotlinx.android.synthetic.main.fragment_forecasts.forecastList
+import com.giedrius.forecastproject.hourly.network.Hourly
+import kotlinx.android.synthetic.main.fragment_hourly.hourly_list
 import javax.inject.Inject
 
 class HourlyFragment : BaseDaggerFragment(), HourlyContract.View {
@@ -39,13 +39,13 @@ class HourlyFragment : BaseDaggerFragment(), HourlyContract.View {
     }
 
     override fun setList() {
-        forecastList.addItemDecoration(DividerItemDecoration(requireContext(), RecyclerView.VERTICAL))
-        forecastList.setHasFixedSize(true)
-        forecastList.adapter = mAdapter
+        hourly_list.addItemDecoration(DividerItemDecoration(requireContext(), RecyclerView.VERTICAL))
+        hourly_list.setHasFixedSize(true)
+        hourly_list.adapter = mAdapter
     }
 
-    override fun populateForecasts() {
-//        mAdapter.setAll(forecasts.toList())
+    override fun displayHourlyForecast(hourly: List<Hourly>) {
+        mAdapter.setAll(hourly)
     }
 
     override fun onDestroy() {

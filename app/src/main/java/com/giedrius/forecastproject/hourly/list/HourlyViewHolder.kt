@@ -9,7 +9,7 @@ import kotlinx.android.synthetic.main.item_forecast.view.label2
 class HourlyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
     fun bind(forecast: Hourly) {
-//        itemView.label1.text = forecast.country
-//        itemView.label2.text = forecast.distance
+        itemView.label1.text = forecast.dateTime
+        itemView.label2.text = "${forecast.temperature.value} ${forecast.temperature.unit}"
     }
 }

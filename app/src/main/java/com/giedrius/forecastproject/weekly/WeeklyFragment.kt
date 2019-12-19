@@ -1,18 +1,15 @@
 package com.giedrius.forecastproject.weekly
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import com.giedrius.forecastproject.R
 import com.giedrius.forecastproject.dagger.BaseDaggerFragment
-import com.giedrius.forecastproject.utils.values.Constants
 import com.giedrius.forecastproject.weekly.list.WeeklyAdapter
-import kotlinx.android.synthetic.main.fragment_forecasts.forecastList
+import com.giedrius.forecastproject.weekly.network.DailyForecasts
+import kotlinx.android.synthetic.main.fragment_weekly.weekly_forecast_list
 import javax.inject.Inject
 
 class WeeklyFragment : BaseDaggerFragment(), WeeklyContract.View {
@@ -39,13 +36,13 @@ class WeeklyFragment : BaseDaggerFragment(), WeeklyContract.View {
     }
 
     override fun setList() {
-        forecastList.addItemDecoration(DividerItemDecoration(requireContext(), RecyclerView.VERTICAL))
-        forecastList.setHasFixedSize(true)
-        forecastList.adapter = mAdapter
+        weekly_forecast_list.addItemDecoration(DividerItemDecoration(requireContext(), RecyclerView.VERTICAL))
+        weekly_forecast_list.setHasFixedSize(true)
+        weekly_forecast_list.adapter = mAdapter
     }
 
-    override fun populateForecasts() {
-//        mAdapter.setAll(forecasts.toList())
+    override fun displayWeeklyForecast(dailyForecasts: List<DailyForecasts>) {
+        mAdapter.setAll(dailyForecasts)
     }
 
     override fun onDestroy() {

@@ -15,10 +15,10 @@ class NowPresenter(
 ) : NowContract.Presenter, ViewPresenter<View>() {
 
     override fun onCreated() {
-        nowService.getCurrentConditions(Constants.VILNIUS_LOCATION_KEY, BuildConfig.API_KEY)
-            .observeOn(mainScheduler)
-            .subscribe(::onCurrentForecastReceived, ::onCurrentForecastFailed)
-            .addTo(subscription)
+//        nowService.getCurrentConditions(Constants.VILNIUS_LOCATION_KEY, BuildConfig.API_KEY)
+//            .observeOn(mainScheduler)
+//            .subscribe(::onCurrentForecastReceived, ::onCurrentForecastFailed)
+//            .addTo(subscription)
     }
 
     private fun onCurrentForecastReceived(now: List<CurrentForecast>) {

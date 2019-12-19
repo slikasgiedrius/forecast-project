@@ -26,8 +26,7 @@ class MainActivity : BaseDaggerActivity() {
     }
 
     private fun initViewPager() {
-        val adapter =
-            ViewPagerAdapter(supportFragmentManager)
+        val adapter = ViewPagerAdapter(supportFragmentManager)
         adapter.addFragment(NowFragment(), getString(R.string.fragment_now))
         adapter.addFragment(HourlyFragment(), getString(R.string.fragment_hourly))
         adapter.addFragment(WeeklyFragment(), getString(R.string.fragment_forecast))

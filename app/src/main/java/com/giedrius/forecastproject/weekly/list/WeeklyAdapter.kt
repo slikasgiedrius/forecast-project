@@ -2,13 +2,14 @@ package com.giedrius.forecastproject.weekly.list
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.giedrius.forecastproject.weekly.network.DailyForecasts
 import com.giedrius.forecastproject.weekly.network.Weekly
 
 class WeeklyAdapter (
     private val factory: WeeklyViewHolderFactory
 ) : RecyclerView.Adapter<WeeklyViewHolder>() {
 
-    private val forecasts = mutableListOf<Weekly>()
+    private val forecasts = mutableListOf<DailyForecasts>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WeeklyViewHolder {
         return factory.create(parent)
@@ -20,7 +21,7 @@ class WeeklyAdapter (
         holder.bind(forecasts[position])
     }
 
-    fun setAll(forecasts: List<Weekly>) {
+    fun setAll(forecasts: List<DailyForecasts>) {
         this.forecasts.clear()
         this.forecasts.addAll(forecasts)
         notifyDataSetChanged()
