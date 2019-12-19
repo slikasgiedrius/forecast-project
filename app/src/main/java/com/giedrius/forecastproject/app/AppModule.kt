@@ -2,8 +2,8 @@ package com.giedrius.forecastproject.app
 
 import android.content.Context
 import android.preference.PreferenceManager
-import com.giedrius.forecastproject.database.PreferencesLocationStorage
-import com.giedrius.forecastproject.database.LocationStorage
+import com.giedrius.forecastproject.utils.database.PreferencesLocationStorage
+import com.giedrius.forecastproject.utils.database.LocationStorage
 import com.giedrius.forecastproject.utils.schedulers.Io
 import com.giedrius.forecastproject.utils.schedulers.Main
 import dagger.Binds
