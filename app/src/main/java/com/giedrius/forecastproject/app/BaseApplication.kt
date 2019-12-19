@@ -1,6 +1,5 @@
 package com.giedrius.forecastproject.app
 
-import com.giedrius.forecastproject.app.DaggerAppComponent
 import dagger.android.AndroidInjector
 import dagger.android.DaggerApplication
 

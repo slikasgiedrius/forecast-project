@@ -1,8 +1,10 @@
 package com.giedrius.forecastproject.utils.network
 
-import com.giedrius.forecastproject.forecast.network.ForecastService
+import com.giedrius.forecastproject.hourly.network.HourlyService
+import com.giedrius.forecastproject.now.network.NowService
 import com.giedrius.forecastproject.utils.values.Constants
 import com.giedrius.forecastproject.utils.schedulers.Io
+import com.giedrius.forecastproject.weekly.network.WeeklyService
 import dagger.Module
 import dagger.Provides
 import io.reactivex.Scheduler
@@ -41,8 +43,20 @@ abstract class NetworkModule {
 
         @JvmStatic
         @Provides
-        fun provideForecastsService(retrofit: Retrofit): ForecastService {
-            return retrofit.create(ForecastService::class.java)
+        fun provideNowService(retrofit: Retrofit): NowService {
+            return retrofit.create(NowService::class.java)
+        }
+
+        @JvmStatic
+        @Provides
+        fun provideHourlyService(retrofit: Retrofit): HourlyService {
+            return retrofit.create(HourlyService::class.java)
+        }
+
+        @JvmStatic
+        @Provides
+        fun provideWeeklyService(retrofit: Retrofit): WeeklyService {
+            return retrofit.create(WeeklyService::class.java)
         }
     }
 }

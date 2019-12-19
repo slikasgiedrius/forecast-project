@@ -12,6 +12,7 @@ android {
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
+        buildConfigField "String", "API_KEY", API_KEY
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -47,6 +48,8 @@ dependencies {
     implementation 'com.squareup.retrofit2:retrofit:' + retrofitVersion
     implementation 'com.squareup.retrofit2:adapter-rxjava2:' + retrofitVersion
     implementation 'com.squareup.retrofit2:converter-gson:' + retrofitVersion
+
+    implementation 'com.google.android.material:material:1.0.0'
 
 
     implementation 'com.squareup.okhttp3:logging-interceptor:3.11.0'

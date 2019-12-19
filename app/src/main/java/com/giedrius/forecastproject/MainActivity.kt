@@ -2,9 +2,14 @@ package com.giedrius.forecastproject
 
 import android.os.Bundle
 import com.giedrius.forecastproject.dagger.BaseDaggerActivity
-import com.giedrius.forecastproject.repository.LocationStorage
-import com.giedrius.forecastproject.forecast.ForecastFragment
-import com.giedrius.forecastproject.utils.extensions.replaceFragment
+import com.giedrius.forecastproject.database.LocationStorage
+import com.giedrius.forecastproject.now.NowFragment
+import com.giedrius.forecastproject.hourly.HourlyFragment
+import com.giedrius.forecastproject.weekly.WeeklyFragment
+import com.giedrius.forecastproject.app.ViewPagerAdapter
+import kotlinx.android.synthetic.main.activity_main.tabs
+import kotlinx.android.synthetic.main.activity_main.toolbar
+import kotlinx.android.synthetic.main.activity_main.viewPager
 import javax.inject.Inject
 
 class MainActivity : BaseDaggerActivity() {
@@ -16,8 +21,16 @@ class MainActivity : BaseDaggerActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if (savedInstanceState == null) {
-            replaceFragment(ForecastFragment.newInstance())
-        }
+        setSupportActionBar(toolbar)
+        if (savedInstanceState == null) { initViewPager() }
+    }
+
+    private fun initViewPager() {
+        val adapter = ViewPagerAdapter(supportFragmentManager)
+        adapter.addFragment(NowFragment(), getString(R.string.fragment_now))
+        adapter.addFragment(HourlyFragment(), getString(R.string.fragment_hourly))
+        adapter.addFragment(WeeklyFragment(), getString(R.string.fragment_forecast))
+        viewPager.adapter = adapter
+        tabs.setupWithViewPager(viewPager)
     }
 }
