@@ -1,12 +1,12 @@
-package com.giedrius.forecastproject.weekly
+package com.giedrius.forecastproject.daily
 
 import com.giedrius.forecastproject.utils.mvp.BasePresenter
-import com.giedrius.forecastproject.weekly.network.DailyForecasts
+import com.giedrius.forecastproject.daily.network.DailyForecasts
 
-interface WeeklyContract   {
+interface DailyContract   {
 
     interface View {
-        fun displayWeeklyForecast(dailyForecasts: List<DailyForecasts>)
+        fun displayDailyForecast(dailyForecasts: List<DailyForecasts>)
         fun setList()
         fun showError(message: String)
     }

@@ -1,8 +1,8 @@
-package com.giedrius.forecastproject.weekly.network
+package com.giedrius.forecastproject.daily.network
 
 import com.google.gson.annotations.SerializedName
 
-data class Weekly(
+data class Daily(
     @SerializedName("Headline") val headline : Headline,
     @SerializedName("DailyForecasts") val dailyForecasts : List<DailyForecasts>
 )

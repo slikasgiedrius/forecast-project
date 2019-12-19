@@ -1,4 +1,4 @@
-package com.giedrius.forecastproject.weekly
+package com.giedrius.forecastproject.daily
 
 import android.os.Bundle
 import android.view.View
@@ -7,19 +7,19 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import com.giedrius.forecastproject.R
 import com.giedrius.forecastproject.dagger.BaseDaggerFragment
-import com.giedrius.forecastproject.weekly.list.WeeklyAdapter
-import com.giedrius.forecastproject.weekly.network.DailyForecasts
-import kotlinx.android.synthetic.main.fragment_weekly.weekly_forecast_list
+import com.giedrius.forecastproject.daily.list.DailyAdapter
+import com.giedrius.forecastproject.daily.network.DailyForecasts
+import kotlinx.android.synthetic.main.fragment_daily.daily_forecast_list
 import javax.inject.Inject
 
-class WeeklyFragment : BaseDaggerFragment(), WeeklyContract.View {
+class DailyFragment : BaseDaggerFragment(), DailyContract.View {
 
     @Inject
-    lateinit var mPresenter: WeeklyContract.Presenter
+    lateinit var mPresenter: DailyContract.Presenter
     @Inject
-    lateinit var mAdapter: WeeklyAdapter
+    lateinit var mAdapter: DailyAdapter
 
-    override fun getLayoutId() = R.layout.fragment_weekly
+    override fun getLayoutId() = R.layout.fragment_daily
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,12 +36,12 @@ class WeeklyFragment : BaseDaggerFragment(), WeeklyContract.View {
     }
 
     override fun setList() {
-        weekly_forecast_list.addItemDecoration(DividerItemDecoration(requireContext(), RecyclerView.VERTICAL))
-        weekly_forecast_list.setHasFixedSize(true)
-        weekly_forecast_list.adapter = mAdapter
+        daily_forecast_list.addItemDecoration(DividerItemDecoration(requireContext(), RecyclerView.VERTICAL))
+        daily_forecast_list.setHasFixedSize(true)
+        daily_forecast_list.adapter = mAdapter
     }
 
-    override fun displayWeeklyForecast(dailyForecasts: List<DailyForecasts>) {
+    override fun displayDailyForecast(dailyForecasts: List<DailyForecasts>) {
         mAdapter.setAll(dailyForecasts)
     }
 

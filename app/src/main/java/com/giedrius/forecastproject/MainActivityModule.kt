@@ -5,8 +5,8 @@ import com.giedrius.forecastproject.hourly.HourlyModule
 import com.giedrius.forecastproject.now.NowFragment
 import com.giedrius.forecastproject.now.NowModule
 import com.giedrius.forecastproject.utils.scopes.FragmentScope
-import com.giedrius.forecastproject.weekly.WeeklyFragment
-import com.giedrius.forecastproject.weekly.WeeklyModule
+import com.giedrius.forecastproject.daily.DailyFragment
+import com.giedrius.forecastproject.daily.DailyModule
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -22,6 +22,6 @@ abstract class MainActivityModule {
     abstract fun contributeHourlyFragment(): HourlyFragment
 
     @FragmentScope
-    @ContributesAndroidInjector(modules = [WeeklyModule::class])
-    abstract fun contributeWeeklyFragment(): WeeklyFragment
+    @ContributesAndroidInjector(modules = [DailyModule::class])
+    abstract fun contributeDailyFragment(): DailyFragment
 }

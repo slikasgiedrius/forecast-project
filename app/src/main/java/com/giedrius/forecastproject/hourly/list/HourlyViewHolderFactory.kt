@@ -8,7 +8,7 @@ class HourlyViewHolderFactory {
 
     fun create(parent: ViewGroup): HourlyViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val view = inflater.inflate(R.layout.item_forecast, parent, false)
+        val view = inflater.inflate(R.layout.item_hourly_forecast, parent, false)
         return HourlyViewHolder(view)
     }
 }
