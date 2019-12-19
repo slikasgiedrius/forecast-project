@@ -7,5 +7,5 @@ import retrofit2.http.Query
 
 interface NowService {
     @GET("currentconditions/v1/{locationKey}")
-    fun getCurrentConditions(@Path("locationKey") locationKey: String, @Query("apikey") apiKey: String): Single<List<CurrentForecast>>
+    fun getCurrentForecast(@Path("locationKey") locationKey: String, @Query("apikey") apiKey: String): Single<List<CurrentForecast>>
 }
