@@ -8,21 +8,21 @@ class HourlyAdapter (
     private val factory: HourlyViewHolderFactory
 ) : RecyclerView.Adapter<HourlyViewHolder>() {
 
-    private val forecasts = mutableListOf<Hourly>()
+    private val hourlyForecasts = mutableListOf<Hourly>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HourlyViewHolder {
         return factory.create(parent)
     }
 
-    override fun getItemCount() = forecasts.size
+    override fun getItemCount() = hourlyForecasts.size
 
     override fun onBindViewHolder(holder: HourlyViewHolder, position: Int) {
-        holder.bind(forecasts[position])
+        holder.bind(hourlyForecasts[position])
     }
 
     fun setAll(forecasts: List<Hourly>) {
-        this.forecasts.clear()
-        this.forecasts.addAll(forecasts)
+        this.hourlyForecasts.clear()
+        this.hourlyForecasts.addAll(forecasts)
         notifyDataSetChanged()
     }
 }
