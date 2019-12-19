@@ -5,6 +5,8 @@ import com.giedrius.forecastproject.now.network.NowService
 import com.giedrius.forecastproject.utils.values.Constants
 import com.giedrius.forecastproject.utils.schedulers.Io
 import com.giedrius.forecastproject.daily.network.DailyService
+import com.giedrius.forecastproject.search.Search
+import com.giedrius.forecastproject.search.SearchService
 import dagger.Module
 import dagger.Provides
 import io.reactivex.Scheduler
@@ -57,6 +59,12 @@ abstract class NetworkModule {
         @Provides
         fun provideDailyService(retrofit: Retrofit): DailyService {
             return retrofit.create(DailyService::class.java)
+        }
+
+        @JvmStatic
+        @Provides
+        fun provideSearchService(retrofit: Retrofit): SearchService {
+            return retrofit.create(SearchService::class.java)
         }
     }
 }

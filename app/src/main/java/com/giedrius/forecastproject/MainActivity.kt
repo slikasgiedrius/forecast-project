@@ -13,6 +13,8 @@ import com.giedrius.forecastproject.hourly.HourlyFragment
 import com.giedrius.forecastproject.daily.DailyFragment
 import com.giedrius.forecastproject.daily.network.Daily
 import com.giedrius.forecastproject.daily.network.DailyService
+import com.giedrius.forecastproject.search.Search
+import com.giedrius.forecastproject.search.SearchService
 import com.giedrius.forecastproject.utils.extensions.onRightDrawableClicked
 import com.giedrius.forecastproject.utils.mvp.ViewPresenter
 import com.giedrius.forecastproject.utils.pager.ViewPagerAdapter
@@ -32,7 +34,7 @@ class MainActivity : BaseDaggerActivity() {
     lateinit var mLocationStorage: LocationStorage
 
     @Inject
-    lateinit var dailyService: DailyService
+    lateinit var searchService: SearchService
 
     @Inject @field:Main lateinit var mainScheduler: Scheduler
 
@@ -44,11 +46,6 @@ class MainActivity : BaseDaggerActivity() {
         super.onCreate(savedInstanceState)
         initViewPager()
         initSearchBar()
-
-        dailyService.getDailyForecast(Constants.VILNIUS_LOCATION_KEY, BuildConfig.API_KEY)
-            .observeOn(mainScheduler)
-            .subscribe(::onDailyForecastsReceived, ::onDailyForecastsFailed)
-            .addTo(subscription)
     }
 
     override fun onDestroy() {
@@ -56,12 +53,7 @@ class MainActivity : BaseDaggerActivity() {
         subscription.dispose()
     }
 
-    private fun onDailyForecastsReceived(dailyForecast: Daily) {
-    }
 
-    private fun onDailyForecastsFailed(throwable: Throwable) {
-
-    }
 
     private fun initViewPager() {
         val adapter = ViewPagerAdapter(supportFragmentManager)
@@ -81,7 +73,7 @@ class MainActivity : BaseDaggerActivity() {
                 if (search_edit_text.text!!.count() > 0) {
                     search_edit_text.setCompoundDrawablesWithIntrinsicBounds(null, null, searchIconDrawable, null)
                     search_edit_text.onRightDrawableClicked {
-                        //Successful search goes here
+                        searchForCity(it.text.toString())
                     }
                 } else {
                     search_edit_text.setCompoundDrawablesWithIntrinsicBounds(null, null, clearIconDrawable, null)
@@ -96,7 +88,7 @@ class MainActivity : BaseDaggerActivity() {
                 if (search_edit_text.text!!.count() > 0) {
                     search_edit_text.setCompoundDrawablesWithIntrinsicBounds(null, null, searchIconDrawable, null)
                     search_edit_text.onRightDrawableClicked {
-                        //Successful search goes here
+                        searchForCity(it.text.toString())
                     }
                 } else {
                     search_edit_text.setCompoundDrawablesWithIntrinsicBounds(null, null, clearIconDrawable, null)
@@ -111,6 +103,22 @@ class MainActivity : BaseDaggerActivity() {
                 before: Int, count: Int) {
             }
         })
+
+    }
+
+    private fun searchForCity(query: String) {
+        searchService.getSearchResults(BuildConfig.API_KEY, query)
+            .observeOn(mainScheduler)
+            .subscribe(::onDailyForecastsReceived, ::onDailyForecastsFailed)
+            .addTo(subscription)
+    }
+
+    private fun onDailyForecastsReceived(searchResult: Search) {
+        Log.d("searched city", searchResult.englishName + searchResult.Key)
+    }
+
+    private fun onDailyForecastsFailed(throwable: Throwable) {
+        Log.d("searched city", throwable.toString())
 
     }
 }
