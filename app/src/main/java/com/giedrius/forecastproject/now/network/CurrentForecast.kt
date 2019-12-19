@@ -2,7 +2,7 @@ package com.giedrius.forecastproject.now.network
 
 import com.google.gson.annotations.SerializedName
 
-data class Now(
+data class CurrentForecast(
     @SerializedName("LocalObservationDateTime") val localObservationDateTime : String,
     @SerializedName("EpochTime") val epochTime : Int,
     @SerializedName("WeatherText") val weatherText : String,

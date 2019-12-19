@@ -2,9 +2,8 @@ package com.giedrius.forecastproject.now
 
 import com.giedrius.forecastproject.BuildConfig
 import com.giedrius.forecastproject.now.NowContract.View
-import com.giedrius.forecastproject.now.network.Now
+import com.giedrius.forecastproject.now.network.CurrentForecast
 import com.giedrius.forecastproject.now.network.NowService
-import com.giedrius.forecastproject.utils.database.LocationStorage
 import com.giedrius.forecastproject.utils.mvp.ViewPresenter
 import com.giedrius.forecastproject.utils.values.Constants
 import io.reactivex.Scheduler
@@ -22,7 +21,7 @@ class NowPresenter(
             .addTo(subscription)
     }
 
-    private fun onCurrentForecastReceived(now: List<Now>) {
+    private fun onCurrentForecastReceived(now: List<CurrentForecast>) {
         onView { bindCurrentForecast(now.first()) }
     }
 
