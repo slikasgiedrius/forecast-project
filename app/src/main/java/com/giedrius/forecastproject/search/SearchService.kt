@@ -6,5 +6,5 @@ import retrofit2.http.Query
 
 interface SearchService {
     @GET("locations/v1/cities/search")
-    fun getSearchResults(@Query("apikey") apiKey: String, @Query("q") query: String): Single<Search>
+    fun getSearchResults(@Query("apikey") apiKey: String, @Query("q") query: String): Single<List<Search>>
 }

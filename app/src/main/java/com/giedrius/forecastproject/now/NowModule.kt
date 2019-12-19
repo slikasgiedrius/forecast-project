@@ -1,6 +1,7 @@
 package com.giedrius.forecastproject.now
 
 import com.giedrius.forecastproject.now.network.NowService
+import com.giedrius.forecastproject.utils.database.LocationStorage
 import com.giedrius.forecastproject.utils.schedulers.Main
 import com.giedrius.forecastproject.utils.scopes.FragmentScope
 import dagger.Module
@@ -16,11 +17,13 @@ abstract class NowModule {
         @JvmStatic @Provides
         fun providePresenter(
             @Main mainScheduler: Scheduler,
-            nowService: NowService
+            nowService: NowService,
+            locationStorage: LocationStorage
         ): NowContract.Presenter {
             return NowPresenter(
                 mainScheduler,
-                nowService
+                nowService,
+                locationStorage
             )
         }
     }

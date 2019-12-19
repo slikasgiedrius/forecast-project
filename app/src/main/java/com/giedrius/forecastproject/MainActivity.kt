@@ -53,8 +53,6 @@ class MainActivity : BaseDaggerActivity() {
         subscription.dispose()
     }
 
-
-
     private fun initViewPager() {
         val adapter = ViewPagerAdapter(supportFragmentManager)
         adapter.addFragment(NowFragment(), getString(R.string.fragment_now))
@@ -67,6 +65,7 @@ class MainActivity : BaseDaggerActivity() {
     private fun initSearchBar() {
         val searchIconDrawable = ContextCompat.getDrawable(applicationContext, R.drawable.ic_search)
         val clearIconDrawable = ContextCompat.getDrawable(applicationContext, R.drawable.ic_clear)
+        search_edit_text.hint = mLocationStorage.getLocation()
 
         search_edit_text.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable) {
@@ -113,12 +112,14 @@ class MainActivity : BaseDaggerActivity() {
             .addTo(subscription)
     }
 
-    private fun onDailyForecastsReceived(searchResult: Search) {
-        Log.d("searched city", searchResult.englishName + searchResult.Key)
+    private fun onDailyForecastsReceived(searchResult: List<Search>) {
+        mLocationStorage.saveLocation(searchResult.first().Key.toString())
+        initViewPager()
+        Log.d("searched city", searchResult.first().englishName + searchResult.first().Key)
     }
 
     private fun onDailyForecastsFailed(throwable: Throwable) {
-        Log.d("searched city", throwable.toString())
+        Log.d("searched city fail", throwable.toString())
 
     }
 }

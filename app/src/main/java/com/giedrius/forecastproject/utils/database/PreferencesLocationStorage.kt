@@ -11,8 +11,8 @@ class PreferencesLocationStorage(
         sharedPreferences.edit().remove(Constants.KEY_LOCATION).apply()
     }
 
-    override fun saveLocation(location: String) {
-        sharedPreferences.edit().putString(Constants.KEY_LOCATION, location).apply()
+    override fun saveLocation(locationKey: String) {
+        sharedPreferences.edit().putString(Constants.KEY_LOCATION, locationKey).apply()
     }
 
     override fun getLocation(): String = sharedPreferences.getString(Constants.KEY_LOCATION, Constants.EMPTY_LOCATION)!!
