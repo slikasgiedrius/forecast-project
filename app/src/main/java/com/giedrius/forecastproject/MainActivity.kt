@@ -6,20 +6,15 @@ import android.text.TextWatcher
 import android.util.Log
 import androidx.core.content.ContextCompat
 import com.giedrius.forecastproject.dagger.BaseDaggerActivity
-import com.giedrius.forecastproject.daily.DailyContract.View
 import com.giedrius.forecastproject.utils.database.LocationStorage
 import com.giedrius.forecastproject.now.NowFragment
 import com.giedrius.forecastproject.hourly.HourlyFragment
 import com.giedrius.forecastproject.daily.DailyFragment
-import com.giedrius.forecastproject.daily.network.Daily
-import com.giedrius.forecastproject.daily.network.DailyService
 import com.giedrius.forecastproject.search.Search
 import com.giedrius.forecastproject.search.SearchService
 import com.giedrius.forecastproject.utils.extensions.onRightDrawableClicked
-import com.giedrius.forecastproject.utils.mvp.ViewPresenter
 import com.giedrius.forecastproject.utils.pager.ViewPagerAdapter
 import com.giedrius.forecastproject.utils.schedulers.Main
-import com.giedrius.forecastproject.utils.values.Constants
 import io.reactivex.Scheduler
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
@@ -65,7 +60,7 @@ class MainActivity : BaseDaggerActivity() {
     private fun initSearchBar() {
         val searchIconDrawable = ContextCompat.getDrawable(applicationContext, R.drawable.ic_search)
         val clearIconDrawable = ContextCompat.getDrawable(applicationContext, R.drawable.ic_clear)
-        search_edit_text.hint = mLocationStorage.getLocation()
+        search_edit_text.setText(mLocationStorage.getLocationName())
 
         search_edit_text.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable) {
@@ -113,7 +108,8 @@ class MainActivity : BaseDaggerActivity() {
     }
 
     private fun onDailyForecastsReceived(searchResult: List<Search>) {
-        mLocationStorage.saveLocation(searchResult.first().Key.toString())
+        mLocationStorage.saveLocationKey(searchResult.first().Key.toString())
+        mLocationStorage.saveLocationName(searchResult.first().englishName)
         initViewPager()
         Log.d("searched city", searchResult.first().englishName + searchResult.first().Key)
     }

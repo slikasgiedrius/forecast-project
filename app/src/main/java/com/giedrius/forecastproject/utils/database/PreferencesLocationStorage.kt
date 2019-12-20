@@ -11,9 +11,15 @@ class PreferencesLocationStorage(
         sharedPreferences.edit().remove(Constants.KEY_LOCATION).apply()
     }
 
-    override fun saveLocation(locationKey: String) {
+    override fun saveLocationKey(locationKey: String) {
         sharedPreferences.edit().putString(Constants.KEY_LOCATION, locationKey).apply()
     }
 
-    override fun getLocation(): String = sharedPreferences.getString(Constants.KEY_LOCATION, Constants.EMPTY_LOCATION)!!
+    override fun getLocationKey(): String = sharedPreferences.getString(Constants.KEY_LOCATION, Constants.EMPTY_LOCATION)!!
+
+    override fun saveLocationName(locationName: String) {
+        sharedPreferences.edit().putString(Constants.NAME_LOCATION, locationName).apply()
+    }
+
+    override fun getLocationName(): String = sharedPreferences.getString(Constants.NAME_LOCATION, Constants.EMPTY_LOCATION)!!
 }
