@@ -32,7 +32,9 @@ class MainActivity : BaseDaggerActivity() {
     @Inject
     lateinit var searchService: SearchService
 
-    @Inject @field:Main lateinit var mainScheduler: Scheduler
+    @Inject
+    @field:Main
+    lateinit var mainScheduler: Scheduler
 
     private val subscription = CompositeDisposable()
 
@@ -62,7 +64,7 @@ class MainActivity : BaseDaggerActivity() {
     private fun initSearchBar() {
         val searchIconDrawable = ContextCompat.getDrawable(applicationContext, R.drawable.ic_search)
         val clearIconDrawable = ContextCompat.getDrawable(applicationContext, R.drawable.ic_clear)
-        if (!locationStorage.getLocationName().equals("")){
+        if (!locationStorage.getLocationName().equals("")) {
             search_edit_text.setText(locationStorage.getLocationName())
             search_edit_text.setCompoundDrawablesWithIntrinsicBounds(null, null, searchIconDrawable, null)
             search_edit_text.onRightDrawableClicked {
@@ -103,7 +105,6 @@ class MainActivity : BaseDaggerActivity() {
 
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
         })
-
     }
 
     private fun searchForCity(query: String) {
@@ -116,9 +117,13 @@ class MainActivity : BaseDaggerActivity() {
     }
 
     private fun onDailyForecastsReceived(searchResult: List<Search>) {
-        locationStorage.saveLocationKey(searchResult.first().Key.toString())
-        locationStorage.saveLocationName(searchResult.first().englishName)
-        initViewPager()
+        if (!searchResult.isEmpty()) {
+            locationStorage.saveLocationKey(searchResult.first().Key.toString())
+            locationStorage.saveLocationName(searchResult.first().englishName)
+            initViewPager()
+        } else {
+            Toast.makeText(applicationContext, "Please make sure city name is correct", Toast.LENGTH_LONG).show()
+        }
     }
 
     private fun onDailyForecastsFailed(throwable: Throwable) {

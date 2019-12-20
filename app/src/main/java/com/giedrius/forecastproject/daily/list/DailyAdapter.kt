@@ -4,7 +4,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.giedrius.forecastproject.daily.network.DailyForecasts
 
-class DailyAdapter (
+class DailyAdapter(
     private val factory: DailyViewHolderFactory
 ) : RecyclerView.Adapter<DailyViewHolder>() {
 

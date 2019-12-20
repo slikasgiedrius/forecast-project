@@ -21,13 +21,19 @@ abstract class AppModule {
 
     @Module
     companion object {
-        @JvmStatic @Provides @Io
+
+        @JvmStatic
+        @Provides
+        @Io
         fun provideIoScheduler(): Scheduler = Schedulers.io()
 
-        @JvmStatic @Provides @Main
+        @JvmStatic
+        @Provides
+        @Main
         fun provideMainScheduler(): Scheduler = AndroidSchedulers.mainThread()
 
-        @JvmStatic @Provides
+        @JvmStatic
+        @Provides
         fun provideLocationStorage(context: Context): LocationStorage {
             val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
             return PreferencesLocationStorage(sharedPreferences)

@@ -3,7 +3,7 @@ package com.giedrius.forecastproject.now
 import com.giedrius.forecastproject.now.network.CurrentForecast
 import com.giedrius.forecastproject.utils.mvp.BasePresenter
 
-interface NowContract  {
+interface NowContract {
 
     interface View {
         fun bindCurrentForecast(currentForecast: CurrentForecast)

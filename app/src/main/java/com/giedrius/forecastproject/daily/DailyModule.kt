@@ -12,10 +12,13 @@ import io.reactivex.Scheduler
 
 @Module
 abstract class DailyModule {
+
     @Module
     companion object {
+
         @FragmentScope
-        @JvmStatic @Provides
+        @JvmStatic
+        @Provides
         fun providePresenter(
             @Main mainScheduler: Scheduler,
             dailyService: DailyService,
@@ -28,7 +31,8 @@ abstract class DailyModule {
             )
         }
 
-        @JvmStatic @Provides
+        @JvmStatic
+        @Provides
         fun provideDailyAdapter(): DailyAdapter = DailyAdapter(DailyViewHolderFactory())
     }
 }

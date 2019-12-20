@@ -9,7 +9,7 @@ import com.giedrius.forecastproject.R
 import com.giedrius.forecastproject.dagger.BaseDaggerFragment
 import com.giedrius.forecastproject.daily.list.DailyAdapter
 import com.giedrius.forecastproject.daily.network.DailyForecasts
-import kotlinx.android.synthetic.main.fragment_daily.daily_forecast_list
+import kotlinx.android.synthetic.main.fragment_daily.daily_list
 import javax.inject.Inject
 
 class DailyFragment : BaseDaggerFragment(), DailyContract.View {
@@ -36,9 +36,9 @@ class DailyFragment : BaseDaggerFragment(), DailyContract.View {
     }
 
     override fun setList() {
-        daily_forecast_list.addItemDecoration(DividerItemDecoration(requireContext(), RecyclerView.VERTICAL))
-        daily_forecast_list.setHasFixedSize(true)
-        daily_forecast_list.adapter = mAdapter
+        daily_list.addItemDecoration(DividerItemDecoration(requireContext(), RecyclerView.VERTICAL))
+        daily_list.setHasFixedSize(true)
+        daily_list.adapter = mAdapter
     }
 
     override fun displayDailyForecast(dailyForecasts: List<DailyForecasts>) {
@@ -49,5 +49,4 @@ class DailyFragment : BaseDaggerFragment(), DailyContract.View {
         mPresenter.dropView()
         super.onDestroy()
     }
-
 }

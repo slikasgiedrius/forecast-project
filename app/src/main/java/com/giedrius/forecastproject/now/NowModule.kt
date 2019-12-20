@@ -13,8 +13,10 @@ abstract class NowModule {
 
     @Module
     companion object {
+
         @FragmentScope
-        @JvmStatic @Provides
+        @JvmStatic
+        @Provides
         fun providePresenter(
             @Main mainScheduler: Scheduler,
             nowService: NowService,

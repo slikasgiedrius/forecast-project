@@ -14,7 +14,9 @@ import javax.inject.Inject
 
 class NowFragment : BaseDaggerFragment(), NowContract.View {
 
-    @Inject lateinit var mPresenter: NowContract.Presenter
+    @Inject
+    lateinit var mPresenter: NowContract.Presenter
+
     override fun getLayoutId() = R.layout.fragment_now
 
     override fun onCreate(savedInstanceState: Bundle?) {

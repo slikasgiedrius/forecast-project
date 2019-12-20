@@ -1,6 +1,5 @@
 package com.giedrius.forecastproject.hourly
 
-import android.content.Context
 import com.giedrius.forecastproject.hourly.list.HourlyAdapter
 import com.giedrius.forecastproject.hourly.list.HourlyViewHolderFactory
 import com.giedrius.forecastproject.hourly.network.HourlyService
@@ -16,8 +15,10 @@ abstract class HourlyModule {
 
     @Module
     companion object {
+
         @FragmentScope
-        @JvmStatic @Provides
+        @JvmStatic
+        @Provides
         fun providePresenter(
             @Main mainScheduler: Scheduler,
             hourlyService: HourlyService,
@@ -30,7 +31,8 @@ abstract class HourlyModule {
             )
         }
 
-        @JvmStatic @Provides
+        @JvmStatic
+        @Provides
         fun provideHourlyAdapter(): HourlyAdapter = HourlyAdapter(HourlyViewHolderFactory())
     }
 }

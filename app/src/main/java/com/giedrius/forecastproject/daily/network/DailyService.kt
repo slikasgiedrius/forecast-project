@@ -9,6 +9,5 @@ interface DailyService {
 
     @GET("forecasts/v1/daily/5day/{locationKey}")
     fun getDailyForecast(@Path("locationKey") locationKey: String, @Query("apikey") apiKey: String): Single<Daily>
-
 }
 

@@ -9,7 +9,7 @@ import com.giedrius.forecastproject.utils.database.LocationStorage
 import io.reactivex.Scheduler
 import io.reactivex.rxkotlin.addTo
 
-class DailyPresenter (
+class DailyPresenter(
     private val mainScheduler: Scheduler,
     private val dailyService: DailyService,
     private val locationStorage: LocationStorage

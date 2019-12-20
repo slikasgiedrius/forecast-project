@@ -5,7 +5,6 @@ import com.giedrius.forecastproject.now.network.NowService
 import com.giedrius.forecastproject.utils.values.Constants
 import com.giedrius.forecastproject.utils.schedulers.Io
 import com.giedrius.forecastproject.daily.network.DailyService
-import com.giedrius.forecastproject.search.Search
 import com.giedrius.forecastproject.search.SearchService
 import dagger.Module
 import dagger.Provides

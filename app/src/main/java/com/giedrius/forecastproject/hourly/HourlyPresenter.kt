@@ -6,7 +6,6 @@ import com.giedrius.forecastproject.hourly.network.Hourly
 import com.giedrius.forecastproject.hourly.network.HourlyService
 import com.giedrius.forecastproject.utils.database.LocationStorage
 import com.giedrius.forecastproject.utils.mvp.ViewPresenter
-import com.giedrius.forecastproject.utils.values.Constants
 import io.reactivex.Scheduler
 import io.reactivex.rxkotlin.addTo
 

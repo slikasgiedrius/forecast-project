@@ -3,7 +3,7 @@ package com.giedrius.forecastproject.hourly
 import com.giedrius.forecastproject.hourly.network.Hourly
 import com.giedrius.forecastproject.utils.mvp.BasePresenter
 
-interface HourlyContract   {
+interface HourlyContract {
 
     interface View {
         fun displayHourlyForecast(hourly: List<Hourly>)

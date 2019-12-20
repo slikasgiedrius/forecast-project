@@ -19,6 +19,7 @@ class HourlyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         itemView.iw_conditions.setBackgroundResource(image)
         itemView.tv_time.text = formateDateToHoursAndMinutes(forecast.dateTime)
         itemView.tv_conditions_description.text = forecast.iconPhrase
-        itemView.tv_temperature.text = "${fahrenheitToCelciusTemp(forecast.temperature.value)} ${fahrenheitToCelciusString()}"
+        itemView.tv_temperature.text =
+            "${fahrenheitToCelciusTemp(forecast.temperature.value)} ${fahrenheitToCelciusString()}"
     }
 }

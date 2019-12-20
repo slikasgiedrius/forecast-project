@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.item_daily_forecast.view.tv_conditions_des
 import kotlinx.android.synthetic.main.item_daily_forecast.view.tv_temperature
 import kotlinx.android.synthetic.main.item_daily_forecast.view.tv_time
 
-class DailyViewHolder (view: View) : RecyclerView.ViewHolder(view) {
+class DailyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
     fun bind(forecast: DailyForecasts) {
         val image: Int = itemView.context.resIdByName("ic_${forecast.day.icon}")
