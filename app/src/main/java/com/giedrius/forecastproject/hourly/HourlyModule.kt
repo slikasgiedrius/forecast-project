@@ -1,5 +1,6 @@
 package com.giedrius.forecastproject.hourly
 
+import android.content.Context
 import com.giedrius.forecastproject.hourly.list.HourlyAdapter
 import com.giedrius.forecastproject.hourly.list.HourlyViewHolderFactory
 import com.giedrius.forecastproject.hourly.network.HourlyService

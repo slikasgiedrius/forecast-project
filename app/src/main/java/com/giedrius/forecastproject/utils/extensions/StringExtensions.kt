@@ -9,7 +9,7 @@ fun fahrenheitToCelciusString(): String {
 }
 
 fun formateDateToHoursAndMinutes(dateToBeFormatted: Date): String {
-    val df = SimpleDateFormat("HH:mm:ss")
+    val df = SimpleDateFormat("HH:mm")
     val date: Date = dateToBeFormatted
     val cal = Calendar.getInstance()
     cal.time = date

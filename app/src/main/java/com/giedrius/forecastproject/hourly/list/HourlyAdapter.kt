@@ -1,8 +1,10 @@
 package com.giedrius.forecastproject.hourly.list
 
+import android.content.Context
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.giedrius.forecastproject.hourly.network.Hourly
+import javax.inject.Inject
 
 class HourlyAdapter (
     private val factory: HourlyViewHolderFactory
@@ -12,6 +14,7 @@ class HourlyAdapter (
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HourlyViewHolder {
         return factory.create(parent)
+
     }
 
     override fun getItemCount() = hourlyForecasts.size
