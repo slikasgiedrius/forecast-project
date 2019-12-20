@@ -16,10 +16,12 @@ class NowPresenter(
 ) : NowContract.Presenter, ViewPresenter<View>() {
 
     override fun onCreated() {
-        nowService.getCurrentForecast(locationStorage.getLocationKey(), BuildConfig.API_KEY)
-            .observeOn(mainScheduler)
-            .subscribe(::onCurrentForecastReceived, ::onCurrentForecastFailed)
-            .addTo(subscription)
+        if (!locationStorage.getLocationKey().equals("")) {
+            nowService.getCurrentForecast(locationStorage.getLocationKey(), BuildConfig.API_KEY)
+                .observeOn(mainScheduler)
+                .subscribe(::onCurrentForecastReceived, ::onCurrentForecastFailed)
+                .addTo(subscription)
+        }
     }
 
     private fun onCurrentForecastReceived(now: List<CurrentForecast>) {

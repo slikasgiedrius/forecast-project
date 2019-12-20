@@ -3,7 +3,7 @@ package com.giedrius.forecastproject
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.giedrius.forecastproject.dagger.BaseDaggerActivity
 import com.giedrius.forecastproject.utils.database.LocationStorage
@@ -15,6 +15,7 @@ import com.giedrius.forecastproject.search.SearchService
 import com.giedrius.forecastproject.utils.extensions.onRightDrawableClicked
 import com.giedrius.forecastproject.utils.pager.ViewPagerAdapter
 import com.giedrius.forecastproject.utils.schedulers.Main
+import com.giedrius.forecastproject.utils.values.Constants
 import io.reactivex.Scheduler
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
@@ -26,7 +27,7 @@ import javax.inject.Inject
 class MainActivity : BaseDaggerActivity() {
 
     @Inject
-    lateinit var mLocationStorage: LocationStorage
+    lateinit var locationStorage: LocationStorage
 
     @Inject
     lateinit var searchService: SearchService
@@ -54,13 +55,20 @@ class MainActivity : BaseDaggerActivity() {
         adapter.addFragment(HourlyFragment(), getString(R.string.fragment_hourly))
         adapter.addFragment(DailyFragment(), getString(R.string.fragment_forecast))
         viewPager.adapter = adapter
+        viewPager.setOffscreenPageLimit(Constants.OFF_SCREEN_PAGE_LIMIT);
         tabs.setupWithViewPager(viewPager)
     }
 
     private fun initSearchBar() {
         val searchIconDrawable = ContextCompat.getDrawable(applicationContext, R.drawable.ic_search)
         val clearIconDrawable = ContextCompat.getDrawable(applicationContext, R.drawable.ic_clear)
-        search_edit_text.setText(mLocationStorage.getLocationName())
+        if (!locationStorage.getLocationName().equals("")){
+            search_edit_text.setText(locationStorage.getLocationName())
+            search_edit_text.setCompoundDrawablesWithIntrinsicBounds(null, null, searchIconDrawable, null)
+            search_edit_text.onRightDrawableClicked {
+                searchForCity(it.text.toString())
+            }
+        }
 
         search_edit_text.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable) {
@@ -101,21 +109,21 @@ class MainActivity : BaseDaggerActivity() {
     }
 
     private fun searchForCity(query: String) {
-        searchService.getSearchResults(BuildConfig.API_KEY, query)
-            .observeOn(mainScheduler)
-            .subscribe(::onDailyForecastsReceived, ::onDailyForecastsFailed)
-            .addTo(subscription)
+        if (!locationStorage.getLocationName().equals(query)) {
+            searchService.getSearchResults(BuildConfig.API_KEY, query)
+                .observeOn(mainScheduler)
+                .subscribe(::onDailyForecastsReceived, ::onDailyForecastsFailed)
+                .addTo(subscription)
+        }
     }
 
     private fun onDailyForecastsReceived(searchResult: List<Search>) {
-        mLocationStorage.saveLocationKey(searchResult.first().Key.toString())
-        mLocationStorage.saveLocationName(searchResult.first().englishName)
+        locationStorage.saveLocationKey(searchResult.first().Key.toString())
+        locationStorage.saveLocationName(searchResult.first().englishName)
         initViewPager()
-        Log.d("searched city", searchResult.first().englishName + searchResult.first().Key)
     }
 
     private fun onDailyForecastsFailed(throwable: Throwable) {
-        Log.d("searched city fail", throwable.toString())
-
+        Toast.makeText(applicationContext, throwable.message.toString(), Toast.LENGTH_LONG).show()
     }
 }

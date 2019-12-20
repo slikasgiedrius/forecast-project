@@ -6,5 +6,6 @@ class Constants {
         const val KEY_LOCATION = "key.location"
         const val NAME_LOCATION = "name.location"
         const val EMPTY_LOCATION = ""
+        const val OFF_SCREEN_PAGE_LIMIT = 3
     }
 }

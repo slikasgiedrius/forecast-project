@@ -19,11 +19,13 @@ abstract class HourlyModule {
         @JvmStatic @Provides
         fun providePresenter(
             @Main mainScheduler: Scheduler,
-            hourlyService: HourlyService
+            hourlyService: HourlyService,
+            locationStorage: LocationStorage
         ): HourlyContract.Presenter {
             return HourlyPresenter(
                 mainScheduler,
-                hourlyService
+                hourlyService,
+                locationStorage
             )
         }
 
