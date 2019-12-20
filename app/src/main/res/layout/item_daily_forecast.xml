@@ -5,27 +5,50 @@
     android:layout_height="64dp"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
-        android:id="@+id/label1"
+    <ImageView
+        android:id="@+id/iw_conditions"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/label2"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintHorizontal_chainStyle="spread_inside"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="ee"/>
+        tools:srcCompat="@drawable/ic_1" />
 
     <TextView
-        android:id="@+id/label2"
+        android:id="@+id/tv_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/default_margin"
+        android:layout_marginEnd="@dimen/default_margin"
+        app:layout_constraintStart_toEndOf="@+id/iw_conditions"
+        app:layout_constraintTop_toTopOf="@+id/iw_conditions"
+        android:textSize="@dimen/default_text_size"
+        android:textColor="@color/black"
+        tools:text="14:00" />
+
+    <TextView
+        android:id="@+id/tv_conditions_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/iw_conditions"
+        app:layout_constraintStart_toEndOf="@+id/iw_conditions"
+        android:layout_marginStart="@dimen/default_margin"
+        android:layout_marginEnd="@dimen/default_margin"
+        android:textSize="@dimen/default_text_size"
+        android:textColor="@color/black"
+        tools:text="Fog" />
+
+    <TextView
+        android:id="@+id/tv_temperature"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/label1"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="11"/>
+        android:layout_marginEnd="@dimen/big_margin"
+        android:textSize="@dimen/default_text_size"
+        android:textColor="@color/black"
+        tools:text="11C / 19C" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
