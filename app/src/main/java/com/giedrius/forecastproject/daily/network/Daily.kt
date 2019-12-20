@@ -1,6 +1,7 @@
 package com.giedrius.forecastproject.daily.network
 
 import com.google.gson.annotations.SerializedName
+import java.util.Date
 
 data class Daily(
     @SerializedName("Headline") val headline : Headline,
@@ -8,7 +9,7 @@ data class Daily(
 )
 
 data class DailyForecasts (
-    @SerializedName("Date") val date : String,
+    @SerializedName("Date") val date : Date,
     @SerializedName("EpochDate") val epochDate : Int,
     @SerializedName("Temperature") val temperature : Temperature,
     @SerializedName("Day") val day : Day,

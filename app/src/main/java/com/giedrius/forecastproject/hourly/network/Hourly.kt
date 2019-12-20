@@ -1,9 +1,10 @@
 package com.giedrius.forecastproject.hourly.network
 
 import com.google.gson.annotations.SerializedName
+import java.util.Date
 
 data class Hourly(
-    @SerializedName("DateTime") val dateTime : String,
+    @SerializedName("DateTime") val dateTime : Date,
     @SerializedName("EpochDateTime") val epochDateTime : Int,
     @SerializedName("WeatherIcon") val weatherIcon : Int,
     @SerializedName("IconPhrase") val iconPhrase : String,

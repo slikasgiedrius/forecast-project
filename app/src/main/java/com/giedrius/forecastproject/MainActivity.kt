@@ -101,9 +101,7 @@ class MainActivity : BaseDaggerActivity() {
                 }
             }
 
-            override fun onTextChanged(s: CharSequence, start: Int,
-                before: Int, count: Int) {
-            }
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
         })
 
     }
