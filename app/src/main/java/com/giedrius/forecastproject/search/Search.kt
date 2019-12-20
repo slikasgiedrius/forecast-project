@@ -16,14 +16,14 @@ data class Search (
     @SerializedName("TimeZone") val timeZone : TimeZone,
     @SerializedName("GeoPosition") val geoPosition : GeoPosition,
     @SerializedName("IsAlias") val isAlias : Boolean,
-    @SerializedName("SupplementalAdminAreas") val supplementalAdminAreas : List<String>,
+    @SerializedName("SupplementalAdminAreas") val supplementalAdminAreas : List<SupplementalAdminAreas>,
     @SerializedName("DataSets") val dataSets : List<String>
 )
 
 data class TimeZone (
     @SerializedName("Code") val code : String,
     @SerializedName("Name") val name : String,
-    @SerializedName("GmtOffset") val gmtOffset : Int,
+    @SerializedName("GmtOffset") val gmtOffset : Any,
     @SerializedName("IsDaylightSaving") val isDaylightSaving : Boolean,
     @SerializedName("NextOffsetChange") val nextOffsetChange : String
 )
@@ -33,7 +33,6 @@ data class Region (
     @SerializedName("LocalizedName") val localizedName : String,
     @SerializedName("EnglishName") val englishName : String
 )
-
 
 data class Metric (
     @SerializedName("Value") val value : Int,
@@ -52,7 +51,6 @@ data class GeoPosition (
     @SerializedName("Longitude") val longitude : Double,
     @SerializedName("Elevation") val elevation : Elevation
 )
-
 
 data class Elevation (
     @SerializedName("Metric") val metric : Metric,
@@ -73,4 +71,10 @@ data class AdministrativeArea (
     @SerializedName("LocalizedType") val localizedType : String,
     @SerializedName("EnglishType") val englishType : String,
     @SerializedName("CountryID") val countryID : String
+)
+
+data class SupplementalAdminAreas (
+    @SerializedName("Level") val level : Int,
+    @SerializedName("LocalizedName") val localizedName : String,
+    @SerializedName("EnglishName") val englishName : String
 )
